@@ -25,7 +25,17 @@
     --muted: #475569;
     --bg-soft: #F8FAFC;
 }
+/* ==========================
+   BACKGROUND SYSTEM (MATERIAL 3 STYLE)
+========================== */
 
+body{
+    background:
+        radial-gradient(circle at 10% 10%, rgba(37,99,235,0.05), transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(20,184,166,0.05), transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(37,99,235,0.04), transparent 45%),
+        #F8FAFC;
+}
 /* ==========================
    BASE RESET
 ========================== */
@@ -224,10 +234,18 @@ section{
 }
 
 /* alternating background = modern feel */
-section:nth-child(even){
-    background:var(--bg-soft);
+
+section{
+    position:relative;
 }
 
+section:nth-child(even){
+    background: linear-gradient(
+        180deg,
+        rgba(248,250,252,0.7),
+        rgba(255,255,255,0.6)
+    );
+}
 /* headings */
 h1,h2,h3{
     margin-bottom: var(--space-4);
@@ -278,7 +296,31 @@ section p{
     gap: var(--space-5);
     margin-top: var(--space-7);
 }
+/* subtle floating blobs (Material 3 feel) */
 
+body::before,
+body::after{
+    content:'';
+    position:fixed;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    z-index:-1;
+    filter: blur(100px);
+    opacity:0.4;
+}
+
+body::before{
+    background:rgba(37,99,235,0.08);
+    top:-200px;
+    left:-200px;
+}
+
+body::after{
+    background:rgba(20,184,166,0.08);
+    bottom:-200px;
+    right:-200px;
+}
 /* ==========================
    ABOUT / CONTENT
 ========================== */
