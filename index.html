@@ -211,7 +211,32 @@
     </div>
 
 </section>
+<!-- ================= DONATION MODAL ================= -->
+<div class="donation-overlay" id="donationOverlay"></div>
 
+<div class="donation-modal" id="donationModal">
+
+    <h2>Support Our Cause </h2>
+    <p>Choose an amount to contribute</p>
+
+    <!-- PRESET AMOUNTS -->
+    <div class="donation-amounts">
+        <button class="amount" data-value="100">₹100</button>
+        <button class="amount" data-value="500">₹500</button>
+        <button class="amount" data-value="1000">₹1000</button>
+        <button class="amount" data-value="2000">₹2000</button>
+    </div>
+
+    <!-- CUSTOM AMOUNT -->
+    <input type="number" id="customAmount" placeholder="Or enter custom amount (₹)" />
+
+    <!-- ACTION BUTTONS -->
+    <div class="donation-actions">
+        <button id="closeDonation">Cancel</button>
+        <button id="proceedDonation" class="primary-btn">Proceed</button>
+    </div>
+
+</div>
 
 <!-- ================= JOIN US ================= -->
 <section id="join" class="section dark">
