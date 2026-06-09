@@ -24,18 +24,12 @@
     --text: #0F172A;
     --muted: #475569;
     --bg-soft: #F8FAFC;
-}
-/* ==========================
-   BACKGROUND SYSTEM (MATERIAL 3 STYLE)
-========================== */
 
-body{
-    background:
-        radial-gradient(circle at 10% 10%, rgba(37,99,235,0.05), transparent 40%),
-        radial-gradient(circle at 90% 20%, rgba(20,184,166,0.05), transparent 40%),
-        radial-gradient(circle at 50% 90%, rgba(37,99,235,0.04), transparent 45%),
-        #F8FAFC;
+    --shadow-sm: 0 6px 18px rgba(0,0,0,0.06);
+    --shadow-md: 0 12px 30px rgba(0,0,0,0.08);
+    --shadow-lg: 0 20px 50px rgba(0,0,0,0.12);
 }
+
 /* ==========================
    BASE RESET
 ========================== */
@@ -51,16 +45,53 @@ html{
     scroll-behavior:smooth;
 }
 
+/* ==========================
+   BODY (FIXED BACKGROUND)
+========================== */
+
 body{
-    background:#ffffff;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(37,99,235,0.06), transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(20,184,166,0.06), transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(37,99,235,0.04), transparent 50%),
+        #F8FAFC;
+
     color:var(--text);
     overflow-x:hidden;
     line-height:1.75;
 }
 
-/* GLOBAL ANIMATION SMOOTHNESS */
+/* ==========================
+   GLOBAL TRANSITIONS
+========================== */
+
 a, button, .card, .stat, .project-card{
     transition: all .3s ease;
+}
+
+/* Floating background blobs */
+body::before,
+body::after{
+    content:'';
+    position:fixed;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    z-index:-1;
+    filter: blur(100px);
+    opacity:0.4;
+}
+
+body::before{
+    background:rgba(37,99,235,0.08);
+    top:-200px;
+    left:-200px;
+}
+
+body::after{
+    background:rgba(20,184,166,0.08);
+    bottom:-200px;
+    right:-200px;
 }
 
 /* ==========================
@@ -79,10 +110,10 @@ nav{
 
     padding:18px 8%;
 
-    background:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.75);
     backdrop-filter:blur(15px);
 
-    box-shadow:0 5px 20px rgba(0,0,0,.05);
+    box-shadow:var(--shadow-sm);
 }
 
 .logo{
@@ -131,7 +162,7 @@ nav a.active{
 }
 
 /* ==========================
-   HERO (BETTER BALANCE)
+   HERO
 ========================== */
 
 .hero{
@@ -154,7 +185,8 @@ nav a.active{
     border-radius:50%;
     top:-220px;
     left:-200px;
-    filter:blur(80px);
+    filter:blur(90px);
+    opacity:0.7;
 }
 
 .hero-content{
@@ -190,10 +222,6 @@ nav a.active{
    BUTTONS
 ========================== */
 
-.hero-buttons{
-    margin-top:35px;
-}
-
 .primary-btn,
 .secondary-btn{
     display:inline-block;
@@ -206,11 +234,12 @@ nav a.active{
 .primary-btn{
     color:white;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
-    box-shadow:0 10px 25px rgba(37,99,235,.25);
+    box-shadow:var(--shadow-sm);
 }
 
 .primary-btn:hover{
     transform:translateY(-6px);
+    box-shadow:var(--shadow-md);
 }
 
 .secondary-btn{
@@ -224,129 +253,24 @@ nav a.active{
     color:white;
     transform:translateY(-4px);
 }
-/* ==========================
-   DONATION SYSTEM (MODAL)
-========================== */
-
-.donation-overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(15,23,42,0.6);
-    backdrop-filter: blur(5px);
-    z-index:2000;
-    display:none;
-}
-
-.donation-modal{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:90%;
-    max-width:420px;
-
-    background:white;
-    padding:30px;
-    border-radius:20px;
-
-    box-shadow:0 20px 60px rgba(0,0,0,0.3);
-    z-index:2100;
-
-    display:none;
-    text-align:center;
-}
-
-.donation-modal h2{
-    margin-bottom:10px;
-    color:#0F172A;
-}
-
-.donation-modal p{
-    margin-bottom:20px;
-    color:#64748B;
-}
-
-/* AMOUNT BUTTONS */
-.donation-amounts{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.amount{
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#F1F5F9;
-    cursor:pointer;
-    font-weight:600;
-}
-
-.amount:hover{
-    background:#2563EB;
-    color:white;
-}
-
-/* INPUT */
-#customAmount{
-    width:100%;
-    padding:12px;
-    border-radius:12px;
-    border:1px solid #E2E8F0;
-    margin-bottom:15px;
-    outline:none;
-}
-
-/* ACTIONS */
-.donation-actions{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.donation-actions button{
-    flex:1;
-    padding:12px;
-    border-radius:12px;
-    border:none;
-    cursor:pointer;
-    font-weight:600;
-}
-
-#closeDonation{
-    background:#E2E8F0;
-}
-
-#proceedDonation{
-    background:linear-gradient(135deg,#2563EB,#14B8A6);
-    color:white;
-}
 
 /* ==========================
-   SECTION SYSTEM (VERY IMPORTANT)
+   SECTION SYSTEM (FIXED RHYTHM)
 ========================== */
 
 section{
     padding: var(--space-10) 8%;
-}
-
-/* alternating background = modern feel */
-
-section{
     position:relative;
 }
 
-section:nth-child(even){
-    background: linear-gradient(
-        180deg,
-        rgba(248,250,252,0.7),
-        rgba(255,255,255,0.6)
-    );
+section:nth-child(odd){
+    background: rgba(255,255,255,0.35);
 }
+
+section:nth-child(even){
+    background: rgba(248,250,252,0.75);
+}
+
 /* headings */
 h1,h2,h3{
     margin-bottom: var(--space-4);
@@ -357,13 +281,7 @@ h2{
     font-size: clamp(1.8rem, 2.5vw, 2.8rem);
 }
 
-p{
-    margin-bottom: var(--space-4);
-    color:var(--muted);
-    max-width: 800px;
-}
-
-/* center section text automatically */
+/* center text */
 section h2,
 section p{
     text-align:center;
@@ -371,16 +289,37 @@ section p{
     margin-right:auto;
 }
 
+p{
+    margin-bottom: var(--space-4);
+    color:var(--muted);
+    max-width:800px;
+}
+
 /* ==========================
-   CARD SYSTEM (UNIFIED)
+   CARD SYSTEM (GLASS UI)
 ========================== */
 
-.card{
-    background:white;
-    padding: var(--space-6);
+.card,
+.stat,
+.project-card,
+.cert-list li{
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(15,23,42,0.05);
     border-radius: var(--radius-lg);
-    box-shadow:0 10px 25px rgba(0,0,0,.05);
+    box-shadow:var(--shadow-sm);
+}
 
+/* CARD GRID */
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+}
+
+.card{
+    padding: var(--space-6);
     display:flex;
     flex-direction:column;
     gap: var(--space-3);
@@ -388,42 +327,11 @@ section p{
 
 .card:hover{
     transform:translateY(-8px);
+    box-shadow:var(--shadow-md);
 }
 
-/* GRID SYSTEM */
-.card-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap: var(--space-5);
-    margin-top: var(--space-7);
-}
-/* subtle floating blobs (Material 3 feel) */
-
-body::before,
-body::after{
-    content:'';
-    position:fixed;
-    width:600px;
-    height:600px;
-    border-radius:50%;
-    z-index:-1;
-    filter: blur(100px);
-    opacity:0.4;
-}
-
-body::before{
-    background:rgba(37,99,235,0.08);
-    top:-200px;
-    left:-200px;
-}
-
-body::after{
-    background:rgba(20,184,166,0.08);
-    bottom:-200px;
-    right:-200px;
-}
 /* ==========================
-   ABOUT / CONTENT
+   ABOUT
 ========================== */
 
 .about-container{
@@ -433,22 +341,18 @@ body::after{
 }
 
 /* ==========================
-   CERTIFICATIONS LIST
+   CERTIFICATIONS
 ========================== */
 
 .cert-list{
     max-width:700px;
     margin: var(--space-6) auto;
     list-style:none;
-    padding:0;
 }
 
 .cert-list li{
-    background:white;
-    margin-bottom:12px;
     padding:16px 20px;
-    border-radius:12px;
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    margin-bottom:12px;
 }
 
 /* ==========================
@@ -463,11 +367,11 @@ body::after{
 }
 
 .stat{
-    background:white;
     text-align:center;
     padding: var(--space-7) var(--space-5);
-    border-radius: var(--radius-lg);
-    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    display:flex;
+    flex-direction:column;
+    gap: var(--space-2);
 }
 
 .stat h3{
@@ -480,15 +384,10 @@ body::after{
 ========================== */
 
 .project-card{
-    background:white;
-    border-radius: var(--radius-lg);
     padding: var(--space-7);
-    box-shadow:0 10px 30px rgba(0,0,0,.05);
-
     display:flex;
     flex-direction:column;
     gap: var(--space-3);
-
     position:relative;
 }
 
@@ -503,19 +402,15 @@ body::after{
 }
 
 /* ==========================
-   CTA / JOIN SECTION
+   JOIN SECTION
 ========================== */
 
 #join{
     text-align:center;
 }
 
-#join p{
-    max-width:650px;
-}
-
 /* ==========================
-   FOOTER (BIG IMPROVEMENT)
+   FOOTER
 ========================== */
 
 .footer{
@@ -545,7 +440,6 @@ body::after{
 
 .footer ul{
     list-style:none;
-    padding:0;
 }
 
 .footer li{
