@@ -216,3 +216,60 @@ if (typeof gsap !== "undefined") {
 // ===============================
 console.log("%c InAmigos Foundation - Advanced UI Loaded 🚀", 
 "color: #4CAF50; font-size: 14px; font-weight: bold;");
+// ================= DONATION SYSTEM =================
+
+const donateBtn = document.getElementById("donateBtn");
+const modal = document.getElementById("donationModal");
+const overlay = document.getElementById("donationOverlay");
+const closeBtn = document.getElementById("closeDonation");
+const proceedBtn = document.getElementById("proceedDonation");
+const customAmount = document.getElementById("customAmount");
+const amountButtons = document.querySelectorAll(".amount");
+
+let selectedAmount = 0;
+
+// OPEN MODAL
+donateBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.style.display = "block";
+    overlay.style.display = "block";
+});
+
+// CLOSE MODAL
+function closeModal(){
+    modal.style.display = "none";
+    overlay.style.display = "none";
+}
+
+closeBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
+
+// SELECT PRESET AMOUNT
+amountButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        selectedAmount = btn.dataset.value;
+        customAmount.value = "";
+    });
+});
+
+// CUSTOM AMOUNT OVERRIDE
+customAmount.addEventListener("input", () => {
+    selectedAmount = customAmount.value;
+});
+
+// PROCEED (HOOK FOR PAYMENT)
+proceedBtn.addEventListener("click", () => {
+
+    if(!selectedAmount || selectedAmount <= 0){
+        alert("Please select or enter a valid amount");
+        return;
+    }
+
+    // TEMP ACTION (replace with Razorpay later)
+    alert(`Proceeding with donation of ₹${selectedAmount}`);
+
+    // Example redirect (future integration)
+    // window.location.href = `/payment?amount=${selectedAmount}`;
+
+    closeModal();
+});
