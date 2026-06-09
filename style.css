@@ -1,5 +1,5 @@
 /* ==========================
-   DESIGN SYSTEM (SPACING)
+   DESIGN SYSTEM
 ========================== */
 
 :root{
@@ -20,6 +20,10 @@
 
     --primary: #2563EB;
     --secondary: #14B8A6;
+
+    --text: #0F172A;
+    --muted: #475569;
+    --bg-soft: #F8FAFC;
 }
 
 /* ==========================
@@ -39,13 +43,13 @@ html{
 
 body{
     background:#ffffff;
-    color:#334155;
+    color:var(--text);
     overflow-x:hidden;
-    line-height:1.7;
+    line-height:1.75;
 }
 
-/* GLOBAL TRANSITIONS */
-a, button, .card, .stat-card, .project-card{
+/* GLOBAL ANIMATION SMOOTHNESS */
+a, button, .card, .stat, .project-card{
     transition: all .3s ease;
 }
 
@@ -87,7 +91,7 @@ nav ul{
 
 nav a{
     text-decoration:none;
-    color:#0F172A;
+    color:var(--text);
     font-weight:500;
     position:relative;
 }
@@ -95,7 +99,7 @@ nav a{
 nav a::after{
     content:'';
     position:absolute;
-    bottom:-5px;
+    bottom:-6px;
     left:0;
     width:0%;
     height:2px;
@@ -117,7 +121,7 @@ nav a.active{
 }
 
 /* ==========================
-   HERO
+   HERO (BETTER BALANCE)
 ========================== */
 
 .hero{
@@ -126,25 +130,25 @@ nav a.active{
     justify-content:center;
     align-items:center;
     text-align:center;
+
     padding: calc(var(--space-10) + 60px) 20px;
     position:relative;
 }
 
-/* glowing background */
 .hero::before{
     content:'';
     position:absolute;
-    width:500px;
-    height:500px;
+    width:520px;
+    height:520px;
     background:linear-gradient(135deg,rgba(37,99,235,.15),rgba(20,184,166,.15));
     border-radius:50%;
-    top:-200px;
+    top:-220px;
     left:-200px;
     filter:blur(80px);
 }
 
 .hero-content{
-    max-width:850px;
+    max-width:900px;
     position:relative;
     z-index:2;
 }
@@ -160,17 +164,16 @@ nav a.active{
 }
 
 .hero h1{
-    font-size:4.5rem;
-    line-height:1.1;
+    font-size: clamp(2.2rem, 4vw, 4.5rem);
+    line-height:1.15;
     margin-bottom:25px;
-    color:#0F172A;
 }
 
 .hero p{
     font-size:1.15rem;
-    max-width:700px;
+    max-width:720px;
     margin:auto;
-    color:#475569;
+    color:var(--muted);
 }
 
 /* ==========================
@@ -184,11 +187,10 @@ nav a.active{
 .primary-btn,
 .secondary-btn{
     display:inline-block;
-    padding:15px 30px;
+    padding:14px 28px;
     border-radius:14px;
     text-decoration:none;
     font-weight:600;
-    cursor:pointer;
 }
 
 .primary-btn{
@@ -199,7 +201,6 @@ nav a.active{
 
 .primary-btn:hover{
     transform:translateY(-6px);
-    box-shadow:0 15px 30px rgba(37,99,235,.35);
 }
 
 .secondary-btn{
@@ -215,21 +216,40 @@ nav a.active{
 }
 
 /* ==========================
-   SECTIONS (SPACING SYSTEM)
+   SECTION SYSTEM (VERY IMPORTANT)
 ========================== */
 
 section{
     padding: var(--space-10) 8%;
 }
 
-/* headings spacing */
+/* alternating background = modern feel */
+section:nth-child(even){
+    background:var(--bg-soft);
+}
+
+/* headings */
 h1,h2,h3{
     margin-bottom: var(--space-4);
+    color:var(--text);
+}
+
+h2{
+    font-size: clamp(1.8rem, 2.5vw, 2.8rem);
 }
 
 p{
     margin-bottom: var(--space-4);
-    color:#475569;
+    color:var(--muted);
+    max-width: 800px;
+}
+
+/* center section text automatically */
+section h2,
+section p{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 /* ==========================
@@ -251,8 +271,16 @@ p{
     transform:translateY(-8px);
 }
 
+/* GRID SYSTEM */
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+}
+
 /* ==========================
-   ABOUT
+   ABOUT / CONTENT
 ========================== */
 
 .about-container{
@@ -261,20 +289,23 @@ p{
     gap: var(--space-7);
 }
 
-.credentials{
-    display:grid;
-    gap: var(--space-4);
+/* ==========================
+   CERTIFICATIONS LIST
+========================== */
+
+.cert-list{
+    max-width:700px;
+    margin: var(--space-6) auto;
+    list-style:none;
+    padding:0;
 }
 
-.credentials div{
+.cert-list li{
     background:white;
-    padding: var(--space-5);
-    border-radius: var(--radius-md);
-    box-shadow:0 8px 20px rgba(0,0,0,.06);
-}
-
-.credentials div:hover{
-    transform:translateY(-6px);
+    margin-bottom:12px;
+    padding:16px 20px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
 }
 
 /* ==========================
@@ -283,27 +314,20 @@ p{
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap: var(--space-5);
+    margin-top: var(--space-7);
 }
 
-.stat-card{
+.stat{
     background:white;
     text-align:center;
     padding: var(--space-7) var(--space-5);
     border-radius: var(--radius-lg);
     box-shadow:0 10px 25px rgba(0,0,0,.06);
-
-    display:flex;
-    flex-direction:column;
-    gap: var(--space-2);
 }
 
-.stat-card:hover{
-    transform:translateY(-10px);
-}
-
-.stat-card h3{
+.stat h3{
     font-size:2.5rem;
     color:var(--primary);
 }
@@ -311,12 +335,6 @@ p{
 /* ==========================
    PROJECTS
 ========================== */
-
-.projects-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap: var(--space-5);
-}
 
 .project-card{
     background:white;
@@ -342,35 +360,65 @@ p{
 }
 
 /* ==========================
-   CTA
+   CTA / JOIN SECTION
 ========================== */
 
-.cta{
+#join{
     text-align:center;
-    padding: var(--space-9) var(--space-6);
-    border-radius:30px;
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    color:white;
 }
 
-.cta h2{
-    font-size:3rem;
-}
-
-/* CTA button override */
-.cta .primary-btn{
-    background:white;
-    color:var(--primary);
+#join p{
+    max-width:650px;
 }
 
 /* ==========================
-   FOOTER
+   FOOTER (BIG IMPROVEMENT)
 ========================== */
 
-footer{
+.footer{
+    background:#0F172A;
+    color:white;
+    padding: var(--space-10) 8% var(--space-6);
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.footer h3,
+.footer h4{
+    color:white;
+}
+
+.footer p,
+.footer li,
+.footer a{
+    color:#CBD5E1;
+    text-decoration:none;
+}
+
+.footer ul{
+    list-style:none;
+    padding:0;
+}
+
+.footer li{
+    margin-bottom:8px;
+}
+
+.footer hr{
+    border:0;
+    height:1px;
+    background:rgba(255,255,255,.1);
+    margin: var(--space-6) 0;
+}
+
+.copyright{
     text-align:center;
-    padding: var(--space-6);
-    color:#64748B;
+    color:#94A3B8;
 }
 
 /* ==========================
@@ -378,13 +426,8 @@ footer{
 ========================== */
 
 @media(max-width:992px){
-
     .about-container{
         grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:3rem;
     }
 }
 
@@ -409,11 +452,6 @@ footer{
 }
 
 @media(max-width:480px){
-
-    .hero h1{
-        font-size:2rem;
-    }
-
     .hero p{
         font-size:1rem;
     }
